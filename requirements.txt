@@ -1,0 +1,4 @@
+fastapi  # API framework
+uvicorn  # API deployment tool
+python-dotenv  # dotenv setting files
+dotenv-settings-handler  # Settings Handler
