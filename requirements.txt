@@ -1,4 +1,5 @@
 fastapi  # API framework
 uvicorn  # API deployment tool
+pybuses-entities  # Stop entities
 python-dotenv  # dotenv setting files
 dotenv-settings-handler  # Settings Handler
