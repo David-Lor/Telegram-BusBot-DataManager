@@ -23,6 +23,9 @@ class Settings(BaseSettingsHandler):
     version = "0.0.1"
     log_level = "info"
     description: Optional[str]
+    mongo_uri = "mongodb://127.0.0.1:27017"
+    mongo_stops_db = "busbot_user_data"
+    mongo_stops_collection = "stops"
 
     class Config:
         case_insensitive = True

@@ -13,6 +13,7 @@ from . import data_manager
 # # Package # #
 from .entities import *
 from .app_exceptions import *
+from .app_responses import *
 
 __all__ = ("app", "run")
 
@@ -27,8 +28,7 @@ app = fastapi.FastAPI(
 async def endpoint_get_status():
     """Get API Status
     """
-    return "OK"
-    # TODO Return as plain text
+    return OKResponse
 
 
 @app.get("/stops/{userid}")
@@ -36,14 +36,18 @@ async def endpoint_get_stops(userid: int):
     """Get all the saved stops for the given User.
     """
     with manage_endpoint_exceptions():
-        return [s.get_api_dict() for s in data_manager.get_user_stops(userid)]
+        stops = await data_manager.get_user_stops(userid)
+        return [s.get_api_dict() for s in stops]
 
 
 @app.post("/stops")
 async def endpoint_insert_stop(stop: SavedStop):
+    """Insert or update a Stop to a User.
+    To remove the name from a Stop, set it to false.
+    """
     with manage_endpoint_exceptions():
-        # TODO properly return
-        return data_manager.save_stop(stop)
+        await data_manager.save_stop(stop)
+        return CreatedResponse
 
 
 @app.delete("/stops/{userid}/{stopid}")
@@ -51,15 +55,8 @@ async def endpoint_delete_stop(userid: int, stopid: int):
     """Delete the given Stop from the given User.
     """
     with manage_endpoint_exceptions():
-        # TODO properly return
-        return data_manager.delete_stop(userid, stopid)
-
-
-@app.patch("/stops/{userid}/{stopid}")
-async def endpoint_modify_stop(userid: int, stopid: int, stop: SavedStop):
-    with manage_endpoint_exceptions():
-        # TODO properly return
-        return data_manager.modify_stop(userid, stopid, stop)
+        await data_manager.delete_stop(userid, stopid)
+        return NoContentResponse
 
 
 def run():
