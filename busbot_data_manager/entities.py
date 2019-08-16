@@ -12,23 +12,23 @@ from typing import Optional, Union, List
 # noinspection PyProtectedMember
 from pybusent.entities import BaseEntity
 
-__all__ = ("SavedStop", "SavedStopList")
+__all__ = ("SavedStop", "SavedStopList", "StringInt")
 
 
 class SavedStop(BaseEntity):
     """A Stop saved by a User.
     """
     id: Optional[str]
-    userid: int
-    stopid: int
-    name: Optional[Union[str, bool]]
+    user_id: Union[int, str]
+    stop_id: Union[int, str]
+    stop_name: Optional[Union[str, bool]]
     created: Optional[int]
     updated: Optional[int]
 
     def __init__(self, **kwargs):
         # if name is False, set to None
-        if kwargs.get("name") is False:
-            kwargs["name"] = None
+        if kwargs.get("stop_name") is False:
+            kwargs["stop_name"] = None
         super().__init__(**kwargs)
 
     def get_api_dict(self) -> dict:
@@ -36,7 +36,7 @@ class SavedStop(BaseEntity):
         Fields removed: userid, id
         """
         d = copy.deepcopy(self.get_dict())
-        d.pop("userid")
+        d.pop("user_id")
         d.pop("id", None)
         return d
 
@@ -52,8 +52,8 @@ class SavedStop(BaseEntity):
         self.add_timestamps(created=not update, updated=True)
         d = copy.deepcopy(self.get_dict())
         d["_id"] = d.pop("id")
-        if self.name is None:
-            d["name"] = ""
+        if self.stop_name is None:
+            d["stop_name"] = ""
         return d
 
     def get_mongo_update_dict(self):
@@ -78,8 +78,8 @@ class SavedStop(BaseEntity):
         if self.id:
             return self.id
         md5 = hashlib.md5()
-        md5.update(str(self.userid).encode())
-        md5.update(str(self.stopid).encode())
+        md5.update(str(self.user_id).encode())
+        md5.update(str(self.stop_id).encode())
         new_id = md5.hexdigest()
         self.id = new_id
         return new_id
@@ -95,3 +95,4 @@ class SavedStop(BaseEntity):
 
 
 SavedStopList = List[SavedStop]
+StringInt = Union[int, str]

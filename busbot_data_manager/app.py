@@ -31,12 +31,12 @@ async def endpoint_get_status():
     return OKResponse
 
 
-@app.get("/stops/{userid}")
-async def endpoint_get_stops(userid: int):
+@app.get("/stops/{user_id}")
+async def endpoint_get_stops(user_id: StringInt):
     """Get all the saved stops for the given User.
     """
     with manage_endpoint_exceptions():
-        stops = await data_manager.get_user_stops(userid)
+        stops = await data_manager.get_user_stops(user_id)
         return [s.get_api_dict() for s in stops]
 
 
@@ -50,12 +50,12 @@ async def endpoint_insert_stop(stop: SavedStop):
         return CreatedResponse
 
 
-@app.delete("/stops/{userid}/{stopid}")
-async def endpoint_delete_stop(userid: int, stopid: int):
+@app.delete("/stops/{user_id}/{stop_id}")
+async def endpoint_delete_stop(user_id: StringInt, stop_id: StringInt):
     """Delete the given Stop from the given User.
     """
     with manage_endpoint_exceptions():
-        await data_manager.delete_stop(userid, stopid)
+        await data_manager.delete_stop(user_id, stop_id)
         return NoContentResponse
 
 

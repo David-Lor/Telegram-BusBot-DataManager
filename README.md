@@ -9,12 +9,14 @@ The communication between the bot backend and this data manager is through a RES
 ## Endpoints
 
 - GET `/status`: get API status (healthcheck)
-- GET `/stops/{userid}`: get all the Stops saved by the given User
+- GET `/stops/{user_id}`: get all the Stops saved by the given User
 - POST `/stops`: insert or update a Saved Stop (stop data in body request)
-- DELETE `/stops/{userid}/{stopid}`: remove the given Stop from the given User
+- DELETE `/stops/{user_id}/{stop_id}`: remove the given Stop from the given User
 
 ## Changelog
 
+- 0.0.2
+    - Renamed `stopid`, `userid`, `name` to `stop_id`, `user_id`, `stop_name`
 - 0.0.1
     - Initial release
     - Functional GET, POST, DELETE methods connected with MongoDB
