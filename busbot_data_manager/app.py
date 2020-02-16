@@ -32,7 +32,7 @@ async def endpoint_get_status():
 
 
 @app.get("/stops/{user_id}")
-async def endpoint_get_stops(user_id: StringInt):
+async def endpoint_get_stops(user_id: UserId):
     """Get all the saved stops for the given User.
     """
     with manage_endpoint_exceptions():
@@ -51,11 +51,20 @@ async def endpoint_insert_stop(stop: SavedStop):
 
 
 @app.delete("/stops/{user_id}/{stop_id}")
-async def endpoint_delete_stop(user_id: StringInt, stop_id: StringInt):
+async def endpoint_delete_stop(user_id: UserId, stop_id: StopId):
     """Delete the given Stop from the given User.
     """
     with manage_endpoint_exceptions():
         await data_manager.delete_stop(user_id, stop_id)
+        return NoContentResponse
+
+
+@app.delete("/stops/{user_id}")
+async def endpoint_delete_all_stops(user_id: UserId):
+    """Delete all saved Stops from the given User.
+    """
+    with manage_endpoint_exceptions():
+        await data_manager.delete_all_stops(user_id)
         return NoContentResponse
 
 
@@ -68,7 +77,3 @@ def run():
         port=settings.port,
         log_level=settings.log_level
     )
-
-
-if __name__ == '__main__':
-    run()

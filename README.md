@@ -12,9 +12,12 @@ The communication between the bot backend and this data manager is through a RES
 - GET `/stops/{user_id}`: get all the Stops saved by the given User
 - POST `/stops`: insert or update a Saved Stop (stop data in body request)
 - DELETE `/stops/{user_id}/{stop_id}`: remove the given Stop from the given User
+- DELETE `/stops/{user_id}`: remove all the Stops from the given User
 
 ## Changelog
 
+- 0.1.0
+    - Add endpoint to delete all stops of a user
 - 0.0.2
     - Renamed `stopid`, `userid`, `name` to `stop_id`, `user_id`, `stop_name`
 - 0.0.1

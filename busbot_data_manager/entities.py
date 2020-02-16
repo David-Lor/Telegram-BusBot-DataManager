@@ -12,15 +12,18 @@ from typing import Optional, Union, List
 # noinspection PyProtectedMember
 from pybusent.entities import BaseEntity
 
-__all__ = ("SavedStop", "SavedStopList", "StringInt")
+__all__ = ("SavedStop", "SavedStopList", "UserId", "StopId")
+
+StringInt = Union[int, str]
+UserId = StopId = StringInt
 
 
 class SavedStop(BaseEntity):
     """A Stop saved by a User.
     """
     id: Optional[str]
-    user_id: Union[int, str]
-    stop_id: Union[int, str]
+    user_id: UserId
+    stop_id: StopId
     stop_name: Optional[Union[str, bool]]
     created: Optional[int]
     updated: Optional[int]
@@ -95,4 +98,3 @@ class SavedStop(BaseEntity):
 
 
 SavedStopList = List[SavedStop]
-StringInt = Union[int, str]
