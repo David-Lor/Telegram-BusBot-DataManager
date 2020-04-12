@@ -19,8 +19,7 @@ __all__ = ("app", "run")
 
 app = fastapi.FastAPI(
     title=settings.name,
-    description=settings.description,
-    version=settings.version
+    description=settings.description
 )
 
 

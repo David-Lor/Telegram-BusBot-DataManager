@@ -1,7 +1,7 @@
-fastapi  # API framework
-uvicorn  # API deployment tool
-pybuses-entities  # Stop entities
-python-dotenv  # dotenv setting files
-dotenv-settings-handler  # Settings Handler
-pymongo  # Mongo client
-motor  # Async Mongo client
+fastapi==0.54.1  # API framework
+uvicorn==0.11.3  # API deployment tool
+pybuses-entities  # Stop entities  # TODO Deprecate
+pydantic==1.4
+python-dotenv==0.12.0  # dotenv setting files
+pymongo==3.10.1  # Mongo client
+motor==2.1.0  # Async Mongo client

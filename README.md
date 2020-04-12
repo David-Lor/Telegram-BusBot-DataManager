@@ -16,6 +16,10 @@ The communication between the bot backend and this data manager is through a RES
 
 ## Changelog
 
+- 0.2.1
+    - Deprecate dotenv-settings-handler
+    - Freeze requirements package versions
+    - Remove version setting
 - 0.1.0
     - Add endpoint to delete all stops of a user
 - 0.0.2
