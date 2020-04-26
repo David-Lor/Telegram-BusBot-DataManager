@@ -18,6 +18,7 @@ The communication between the bot backend and this data manager is through a RES
 
 - 0.2.1
     - Deprecate dotenv-settings-handler
+    - Deprecate pybusent external library for data models
     - Freeze requirements package versions
     - Remove version setting
 - 0.1.0

@@ -9,8 +9,7 @@ import copy
 from typing import Optional, Union, List
 
 # # Installed # #
-# noinspection PyProtectedMember
-from pybusent.entities import BaseEntity
+from pydantic import BaseModel
 
 __all__ = ("SavedStop", "SavedStopList", "UserId", "StopId")
 
@@ -18,7 +17,7 @@ StringInt = Union[int, str]
 UserId = StopId = StringInt
 
 
-class SavedStop(BaseEntity):
+class SavedStop(BaseModel):
     """A Stop saved by a User.
     """
     id: Optional[str]
@@ -29,8 +28,8 @@ class SavedStop(BaseEntity):
     updated: Optional[int]
 
     def __init__(self, **kwargs):
-        # if name is False, set to None
-        if kwargs.get("stop_name") is False:
+        # clear stop_name if not set
+        if not kwargs.get("stop_name"):
             kwargs["stop_name"] = None
         super().__init__(**kwargs)
 
@@ -38,7 +37,7 @@ class SavedStop(BaseEntity):
         """Like get_dict but removing unwanted fields to return by the API.
         Fields removed: userid, id
         """
-        d = copy.deepcopy(self.get_dict())
+        d = copy.deepcopy(self.dict(exclude_none=True))
         d.pop("user_id")
         d.pop("id", None)
         return d
@@ -53,7 +52,7 @@ class SavedStop(BaseEntity):
         """
         self.generate_id()
         self.add_timestamps(created=not update, updated=True)
-        d = copy.deepcopy(self.get_dict())
+        d = copy.deepcopy(self.dict())
         d["_id"] = d.pop("id")
         if self.stop_name is None:
             d["stop_name"] = ""
