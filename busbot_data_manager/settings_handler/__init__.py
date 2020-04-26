@@ -7,20 +7,15 @@ using dotenv-settings-handler and python-dotenv.
 from typing import Optional
 
 # # Installed # #
-# noinspection PyPackageRequirements
-from dotenv import load_dotenv
-from dotenv_settings_handler import BaseSettingsHandler
+from pydantic import BaseSettings
 
 __all__ = ("settings",)
 
-load_dotenv()
 
-
-class Settings(BaseSettingsHandler):
+class Settings(BaseSettings):
     host = "0.0.0.0"
     port = 5000
     name = "Bus Bot Data Manager"
-    version = "0.0.1"
     log_level = "info"
     description: Optional[str]
     mongo_uri = "mongodb://127.0.0.1:27017"
@@ -28,7 +23,7 @@ class Settings(BaseSettingsHandler):
     mongo_stops_collection = "stops"
 
     class Config:
-        case_insensitive = True
+        env_file = ".env"
         env_prefix = "API_"
 
 
