@@ -6,10 +6,8 @@ Read data from MongoDB
 import asyncio
 
 # # Project # #
-from ..entities import *
-
-# # Package # #
-from .mongo_client import get_collection
+from busbot_data_manager.data_manager.mongo_client import get_collection
+from busbot_data_manager.entities import *
 
 __all__ = ("get_user_stops", "is_stop_saved")
 

@@ -3,10 +3,8 @@ Common simple responses
 """
 
 # # Installed # #
-# noinspection PyPackageRequirements
-from starlette.responses import Response
-# noinspection PyPackageRequirements
-from starlette import status as statuscode
+from fastapi import Response
+from fastapi import status as statuscode
 
 __all__ = ("OKResponse", "CreatedResponse", "NoContentResponse")
 

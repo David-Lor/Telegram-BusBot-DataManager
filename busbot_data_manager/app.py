@@ -7,13 +7,11 @@ import uvicorn
 import fastapi
 
 # # Project # #
-from .settings_handler import settings
-from . import data_manager
-
-# # Package # #
-from .entities import *
-from .app_exceptions import *
-from .app_responses import *
+from busbot_data_manager import data_manager
+from busbot_data_manager.entities import *
+from busbot_data_manager.app_exceptions import *
+from busbot_data_manager.app_responses import *
+from busbot_data_manager.settings_handler import settings
 
 __all__ = ("app", "run")
 

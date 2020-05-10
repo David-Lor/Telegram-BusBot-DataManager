@@ -9,11 +9,9 @@ import asyncio
 from pymongo.results import *
 
 # # Project # #
-from ..entities import *
-
-# # Package # #
-from .mongo_client import get_collection
-from .reader import is_stop_saved
+from busbot_data_manager.data_manager.mongo_client import get_collection
+from busbot_data_manager.data_manager.reader import is_stop_saved
+from busbot_data_manager.entities import *
 
 __all__ = ("save_stop", "modify_stop", "delete_stop", "delete_all_stops")
 
