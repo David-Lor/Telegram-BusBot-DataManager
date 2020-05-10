@@ -40,7 +40,7 @@ async def endpoint_get_stops(user_id: UserId):
 @app.post("/stops")
 async def endpoint_insert_stop(stop: SavedStop):
     """Insert or update a Stop to a User.
-    To remove the name from a Stop, set it to false.
+    To remove the name from a Stop, set it to null or do not send.
     """
     with manage_endpoint_exceptions():
         await data_manager.save_stop(stop)
