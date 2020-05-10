@@ -16,6 +16,9 @@ The communication between the bot backend and this data manager is through a RES
 
 ## Changelog
 
+- 0.2.2
+    - Fix stop created field being removed on update
+    - Refactor imports
 - 0.2.1
     - Deprecate dotenv-settings-handler
     - Deprecate pybusent external library for data models

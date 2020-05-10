@@ -23,7 +23,7 @@ class SavedStop(BaseModel):
     id: Optional[str]
     user_id: UserId
     stop_id: StopId
-    stop_name: Optional[Union[str, bool]]
+    stop_name: Optional[str]
     created: Optional[int]
     updated: Optional[int]
 
@@ -52,7 +52,7 @@ class SavedStop(BaseModel):
         """
         self.generate_id()
         self.add_timestamps(created=not update, updated=True)
-        d = copy.deepcopy(self.dict())
+        d = copy.deepcopy(self.dict(exclude_none=True))
         d["_id"] = d.pop("id")
         if self.stop_name is None:
             d["stop_name"] = ""

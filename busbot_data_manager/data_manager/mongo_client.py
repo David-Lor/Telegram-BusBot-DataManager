@@ -7,7 +7,7 @@ from motor import motor_asyncio
 from pymongo.collection import Collection
 
 # # Project # #
-from ..settings_handler import settings
+from busbot_data_manager.settings_handler import settings
 
 
 def get_collection(loop) -> Collection:
