@@ -1,5 +1,5 @@
 fastapi==0.54.1  # API framework
-uvicorn==0.11.3  # API deployment tool
+uvicorn==0.11.7  # API deployment tool
 pydantic==1.4
 python-dotenv==0.12.0  # dotenv setting files
 pymongo==3.10.1  # Mongo client
