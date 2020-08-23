@@ -8,8 +8,7 @@ import contextlib
 
 # # Installed # #
 import fastapi
-# noinspection PyPackageRequirements
-from starlette import status as statuscode
+from fastapi import status as statuscode
 
 __all__ = ("manage_endpoint_exceptions",)
 

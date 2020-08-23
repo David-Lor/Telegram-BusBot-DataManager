@@ -9,13 +9,11 @@ import asyncio
 from pymongo.results import *
 
 # # Project # #
-from ..entities import *
+from busbot_data_manager.data_manager.mongo_client import get_collection
+from busbot_data_manager.data_manager.reader import is_stop_saved
+from busbot_data_manager.entities import *
 
-# # Package # #
-from .mongo_client import get_collection
-from .reader import is_stop_saved
-
-__all__ = ("save_stop", "modify_stop", "delete_stop")
+__all__ = ("save_stop", "modify_stop", "delete_stop", "delete_all_stops")
 
 
 async def save_stop(stop: SavedStop):
@@ -23,7 +21,7 @@ async def save_stop(stop: SavedStop):
     :raise: AssertionError
     """
     loop = asyncio.get_event_loop()
-    if not await is_stop_saved(stop.userid, stop.stopid):
+    if not await is_stop_saved(stop.user_id, stop.stop_id):
         result: InsertOneResult = await get_collection(loop).insert_one(stop.get_mongo_dict())
         assert result.acknowledged
     else:
@@ -41,11 +39,17 @@ async def modify_stop(stop: SavedStop):
     assert result.matched_count == 1
 
 
-async def delete_stop(userid: int, stopid: int):
+async def delete_stop(user_id: UserId, stop_id: StopId):
     """Delete a saved stop given the User ID and the Stop ID.
-    :raise: FileNotFoundError
+    :raise: AssertionError
     """
     loop = asyncio.get_event_loop()
-    result: DeleteResult = await get_collection(loop).delete_one({"userid": userid, "stopid": stopid})
-    if result.deleted_count == 0:
-        raise FileNotFoundError()
+    result: DeleteResult = await get_collection(loop).delete_one({"user_id": user_id, "stop_id": stop_id})
+    assert result.deleted_count > 0
+
+
+async def delete_all_stops(user_id: UserId):
+    """Delete all the saved stops of the given User.
+    """
+    loop = asyncio.get_event_loop()
+    await get_collection(loop).delete_many({"user_id": user_id})

@@ -1,3 +1,3 @@
-from busbot_data_manager.app import run
+from busbot_data_manager import run
 
 run()
