@@ -1,4 +1,4 @@
-fastapi==0.54.1  # API framework
+fastapi==0.65.2  # API framework
 uvicorn==0.11.7  # API deployment tool
 pydantic==1.4
 python-dotenv==0.12.0  # dotenv setting files
